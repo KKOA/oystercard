@@ -31,33 +31,33 @@ describe OysterCard do
   it 'will deduct money from the oystercard when touched out' do
     subject.top_up(5)
     subject.send(:deduct, 5)
-    expect { subject.touch_out(:station) }.to change { subject.balance }.by(-1)
+    expect { subject.touch_out(:exit_station) }.to change { subject.balance }.by(-1)
   end
 
   it 'changes to journey state to true when touched in' do
     subject.top_up(10)
-    subject.touch_in(:station)
+    subject.touch_in(:entry_station)
     expect(subject.in_journey).to be true
   end
 
   it 'changes the journey state to false when touched out' do
     subject.top_up(10)
-    subject.touch_in(:station)
-    subject.touch_out(:station)
+    subject.touch_in(:entry_station)
+    subject.touch_out(:exit_station)
     expect(subject.in_journey).to be false
   end
 
   describe '#touch_in' do
     it 'will throw an error with an insufficient balance' do
       err_msg = 'You have an insufficient balance'
-      expect { subject.touch_in(:station) }.to raise_error(err_msg)
+      expect { subject.touch_in(:entry_station) }.to raise_error(err_msg)
     end
   end
 
   it 'remembers the entry station when user touches in' do
     subject.top_up(5)
-    subject.touch_in(:station)
-    expect(subject.entry).to eq(:station)
+    subject.touch_in(:entry_station)
+    expect(subject.entry).to eq(:entry_station)
   end
 
   describe '#list_of_journeys' do
@@ -67,10 +67,10 @@ describe OysterCard do
 
     it 'adds a journey when touched in and out' do
       subject.top_up(10)
-      subject.touch_in(:station)
-      subject.touch_out(:station)
-      expect(subject.list_of_journeys).to include(:entry => :station, :exit => :station)
-      expect(subject.list_of_journeys).to include(journey)
+      subject.touch_in(:entry_station)
+      subject.touch_out(:exit_station)
+      expect(subject.list_of_journeys).to include(:entry => :entry_station, :exit => :exit_station)
+
     end
   end
 end

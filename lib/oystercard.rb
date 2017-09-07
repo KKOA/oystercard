@@ -2,7 +2,8 @@ class OysterCard
   attr_accessor :balance, :in_journey
   attr_reader :entry, :list_of_journeys
 
-  MAXIMUM = 100
+  MAX_BALANCE  = 100
+  MIN_FEE = 1
 
   def initialize
     @balance = 0
@@ -10,13 +11,14 @@ class OysterCard
   end
 
   def top_up(amount)
-    err_msg = "#{MAXIMUM} is over your allowed top-up limit"
-    raise err_msg if (@balance + amount) >= MAXIMUM
+    err_msg = "#{MAX_BALANCE} is over your allowed top-up limit"
+    raise err_msg if (@balance + amount) >= MAX_BALANCE
     @balance += amount
   end
 
   def touch_in(entry_station)
-    raise 'You have an insufficient balance' if @balance < 1
+    err_msg = 'You have an insufficient balance'
+    raise err_msg if @balance < MIN_FEE
     @entry = entry_station
     @in_journey = true
   end

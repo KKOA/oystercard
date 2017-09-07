@@ -4,5 +4,4 @@ source 'https://rubygems.org' do
   group :development, :test do
     gem 'rspec'
   end
-  
 end

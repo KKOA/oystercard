@@ -10,7 +10,8 @@ class OysterCard
   end
 
   def top_up(amount)
-    raise "#{MAXIMUM} is over your allowed top-up limit" if (@balance + amount) >= MAXIMUM
+    err_msg = "#{MAXIMUM} is over your allowed top-up limit"
+    raise err_msg if (@balance + amount) >= MAXIMUM
     @balance += amount
   end
 
@@ -21,7 +22,7 @@ class OysterCard
   end
 
   def touch_out(exit_station)
-    @list_of_journeys << {:entry => @entry, :exit => exit_station}
+    @list_of_journeys << { :entry => @entry, :exit => exit_station }
     @balance -= 1
     @in_journey = false
     @entry = nil

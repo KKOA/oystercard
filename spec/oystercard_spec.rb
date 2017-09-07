@@ -31,9 +31,17 @@ describe OysterCard do
 
   it 'will deduct money from the oystercard when touched out' do
     subject.top_up(10)
-    subject.send(:deduct, 5)
-    expect { subject.touch_out(:exit_station) }.to change { subject.balance }.by(-1)
+    subject.touch_in(:entry_station) #changed
+    expect { subject.touch_out(:exit_station) }.to change { subject.balance }.by(-OysterCard::MIN_FEE)
   end
+
+  it 'will deduct PENALTY from the oystercard when touched out' do
+    subject.top_up(10)
+    subject.touch_out(:exit_station)
+    expect { subject.touch_out(:exit_station) }.to change { subject.balance }.by(-OysterCard::PENALTY)
+  end
+
+
 
   it 'changes to journey state to true when touched in' do
     subject.top_up(10)

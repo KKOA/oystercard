@@ -58,7 +58,7 @@ describe OysterCard do
    end
 
   it 'checks that there is an empty list of journeys by default' do
-    expect(subject.list_of_journeys).to eq [{}]
+    expect(subject.list_of_journeys).to eq []
   end
 
   it 'adds a journey when touched in and out' do

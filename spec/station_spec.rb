@@ -9,5 +9,4 @@ describe Station do
     station = Station.new('kingcross', '1')
     expect(station.zone).to eq '1'
   end
-
 end

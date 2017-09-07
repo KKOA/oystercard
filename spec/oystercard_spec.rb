@@ -40,14 +40,14 @@ describe OysterCard do
 
   it 'changes the journey state to false when touched out' do
     subject.top_up(10)
-    kingscross = double
+
     subject.touch_in(:station)
     subject.touch_out(:station)
     expect(subject.in_journey).to be false
    end
 
   it 'will throw an error with an insufficient balance' do
-    kingscross = double
+
     expect{ subject.touch_in(:station) }.to raise_error("You have an insufficient balance")
    end
 

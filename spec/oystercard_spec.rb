@@ -66,11 +66,6 @@ describe OysterCard do
       expect(subject.list_of_journeys).to eq []
     end
 
-    it 'adds a journey when touched in and out' do
-      subject.top_up(10)
-      subject.touch_in(:entry_station)
-      subject.touch_out(:exit_station)
-      expect(subject.list_of_journeys).to include(:entry => :entry_station, :exit => :exit_station)
-    end
+
   end
 end
